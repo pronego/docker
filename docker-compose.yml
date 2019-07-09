@@ -7,7 +7,7 @@
 #    docker exec -it <container name> bash
 #
 # This file describes the services required to run this application.
-# Single part definitions are located inside the .docker folder.
+# Single part definitions are located inside the appropriate docker service folder.
 # Environment variables are defined in .env file which must be
 # placed in the folder where docker-compose is called.
 version: '3'
@@ -45,7 +45,7 @@ services:
     # i.e. where the Dockerfile of the service is located
     # all paths are relatieve to the location of docker-compose.yml
     build:
-      context: .docker/nginx-${FRAMEWORK}
+      context: nginx-${FRAMEWORK}
     depends_on:
       - php
     # defines the port mapping, corresponds to the "-p" flag, <external>:<internal>
@@ -55,14 +55,14 @@ services:
     # mount the app_path directory of the host to /var/www in the container, corresponds to the "-v" option
     volumes:
       - ${APP_PATH}:/var/www/app
-      - ${APP_PATH}/.docker/logs/nginx/:/var/log/nginx
+      - ${APP_PATH}/${DOCKER_PATH}/logs/nginx/:/var/log/nginx
     networks:
       - web-network
 
   php:
     image: pronego/php:${PHP_VERSION}
     build:
-      context: .docker/php-${PHP_VERSION}
+      context: php-${PHP_VERSION}
       args:
         TIMEZONE: ${TIMEZONE}
     tty: true
