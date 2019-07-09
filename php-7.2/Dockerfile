@@ -60,9 +60,9 @@ RUN pecl install xdebug ssh2-1.1.2 \
 && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 # use XDEBUG_PROFILE GET/POST parameter to activate
 && echo "xdebug.profiler_enable_trigger=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-&& echo "xdebug.profiler_output_dir=/var/www" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+&& echo "xdebug.profiler_output_dir=/var/www/app" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Cleanup
 RUN apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/src
 
-WORKDIR /var/www
+WORKDIR /var/www/app
