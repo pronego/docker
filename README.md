@@ -18,8 +18,11 @@ Dockerfiles for various setups, such as
 
 ## Useful `docker` commands
 
-To connect a terminal on windows (optionally prepend 'winpty' if cmd results in error:  
+To connect a terminal on windows (optionally prepend `winpty` if cmd results in error:  
 `docker exec -it <container name> bash`
 
 To rebuild a single container, run:  
 `docker-compose up -d --no-deps --build <service_name>`
+
+> `-no-deps` - Don't start linked services.  
+> `--build` - Build images before starting containers.
