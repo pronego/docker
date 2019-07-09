@@ -1,0 +1,88 @@
+# Quick usage:
+# 1. Install docker (+ gitbash on windows)
+# 2. Open shell/gitbash
+#    start: # docker-compose run -d
+#    stop:  # docker-compose down
+# To connect a terminal on windows (optionally prepend 'winpty' if cmd results in error:
+#    docker exec -it <container name> bash
+#
+# This file describes the services required to run this application.
+# Single part definitions are located inside the .docker folder.
+# Environment variables are defined in .env file which must be
+# placed in the folder where docker-compose is called.
+version: '3'
+
+# Define the network
+networks:
+  web-network:
+
+# Define the services
+services:
+  # corresponds to the "--name" parameter
+  # However, service names are automatically prefixed
+  # with the name of the parent folder to this file.
+
+  db:
+    image: mysql:${MYSQL_VERSION}
+    command: --local-infile --default-authentication-plugin=mysql_native_password --sql-mode="STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION" --innodb_strict_mode=0 --character-set-server=utf8 --secure-file-priv=''
+    # defines the port mapping, corresponds to the "-p" flag, <external>:<internal>
+    ports:
+      - 3306:3306
+    volumes:
+      - ${MYSQL_DATA_PATH}:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    networks:
+      - web-network
+
+  nginx:
+    # if 'image' defined together with 'build', it's used as the build tag
+    image: pronego/nginx:${FRAMEWORK}
+    # Define the directory where the build should happen,
+    # i.e. where the Dockerfile of the service is located
+    # all paths are relatieve to the location of docker-compose.yml
+    build:
+      context: .docker/nginx-${FRAMEWORK}
+    depends_on:
+      - php
+    # defines the port mapping, corresponds to the "-p" flag, <external>:<internal>
+    ports:
+      - "80:80"
+    tty: true
+    # mount the app_path directory of the host to /var/www in the container, corresponds to the "-v" option
+    volumes:
+      - ${APP_PATH}:/var/www/app
+      - ${APP_PATH}/.docker/logs/nginx/:/var/log/nginx
+    networks:
+      - web-network
+
+  php:
+    image: pronego/php:${PHP_VERSION}
+    build:
+      context: .docker/php-${PHP_VERSION}
+      args:
+        TIMEZONE: ${TIMEZONE}
+    tty: true
+    volumes:
+      - ${APP_PATH}:/var/www/app
+    networks:
+      - web-network
+
+  # Call: http://[DOCKER-IP]:8081
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_HOST=db
+      # Alternatively, use arbitrary host, asked for it on the login page
+      #- PMA_ARBITRARY=1
+    restart: always
+    ports:
+      - 81:80
+    networks:
+      - web-network
+    depends_on:
+      - db
