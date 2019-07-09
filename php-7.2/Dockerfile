@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     libssh2-1-dev \
     libxml2-dev \
     locales \
+    libmcrypt-dev \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/* \
 	&& printf 'en_US.UTF-8 UTF-8\n' >> /etc/locale.gen \
@@ -42,9 +43,9 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 
 # Type docker-php-ext-install to see available extensions
 # requirements for laravel
-RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer xml ctype json bcmath \
+RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer xml ctype json bcmath  \
 # + some further
-	zip curl iconv gd intl exif sodium
+	zip curl iconv gd intl exif sodium mcrypt
 
 
 # Install xdebug + ssh2

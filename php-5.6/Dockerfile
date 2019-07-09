@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libssh2-1-dev libssh2-1 \
     locales \
+    libmcrypt-dev \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/* \
 	&& printf 'en_US.UTF-8 UTF-8\n' >> /etc/locale.gen \
@@ -40,7 +41,7 @@ RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} >
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
 # Type docker-php-ext-install to see available extensions
-RUN docker-php-ext-install pdo pdo_mysql mysqli zip mbstring curl iconv gd intl exif
+RUN docker-php-ext-install pdo pdo_mysql mysqli zip mbstring curl iconv gd intl exif mcrypt
 
 
 # Install xdebug + ssh2
