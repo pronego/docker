@@ -68,6 +68,8 @@ services:
     tty: true
     volumes:
       - ${APP_PATH}:/var/www/app
+    depends_on:
+      - db
     networks:
       - web-network
 
