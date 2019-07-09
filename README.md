@@ -15,3 +15,11 @@ Dockerfiles for various setups, such as
     - Specify the PHP version
     - Specify the MySQL version and settings.
 3. Change into the .docker dir and run `docker-compose up -d`
+
+## Useful `docker` commands
+
+To connect a terminal on windows (optionally prepend 'winpty' if cmd results in error:  
+`docker exec -it <container name> bash`
+
+To rebuild a single container, run:  
+`docker-compose up -d --no-deps --build <service_name>`
