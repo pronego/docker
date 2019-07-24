@@ -30,6 +30,8 @@ RUN apt-get update && apt-get install -y \
 	&& printf 'de_DE.UTF-8 UTF-8\n' >> /etc/locale.gen \
 	&& locale-gen
 
+# Set alias for easier work on console
+RUN alias ll='ls -l --color=auto'
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
