@@ -48,12 +48,14 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 # requirements for laravel
 RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer xml ctype json bcmath  \
 # + some further
-	zip curl iconv gd intl exif sodium mcrypt
+	zip curl iconv gd intl exif sodium
 
 
 # Install xdebug + ssh2
 RUN pecl install xdebug ssh2-1.1.2 \
 && docker-php-ext-enable xdebug ssh2 \
+&& pecl install mcrypt-1.0.2 \
+&& docker-php-ext-enable mcrypt \
 && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 && echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 && echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
