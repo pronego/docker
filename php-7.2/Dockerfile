@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y \
 	&& locale-gen
 
 # Set alias for easier work on console
-RUN alias ll='ls -l --color=auto'
+RUN echo 'alias ll="ls -l --color=auto"' >> ~/.bashrc
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
