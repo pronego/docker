@@ -8,6 +8,7 @@ ARG TIMEZONE
 MAINTAINER Dr. Manuel Lamotte-Schubert <mls@pronego.com>
 
 RUN apt-get update && apt-get install -y \
+	less \
     openssl \
     git \
     unzip \
