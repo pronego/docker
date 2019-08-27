@@ -6,6 +6,10 @@
 # To connect a terminal on windows (optionally prepend 'winpty' if cmd results in error:
 #    docker exec -it <container name> bash
 #
+# Debug:
+# - In a browser, Debug as PHP Web Page (set path mapping)
+# - For CLI, listen to PHP Debug Connections, then open container bash and run app
+#
 # This file describes the services required to run this application.
 # Single part definitions are located inside the appropriate docker service folder.
 # Environment variables are defined in .env file which must be
@@ -68,6 +72,10 @@ services:
     tty: true
     volumes:
       - ${APP_PATH}:/var/www/app
+    environment:
+      # Set the name of the PHPStorm server configuration (Settings > Language & Frameworks > PHP > Servers)
+      PHP_IDE_CONFIG: "serverName=localhost"
+      XDEBUG_CONFIG: "remote_autostart=1"
     depends_on:
       - db
     networks:
