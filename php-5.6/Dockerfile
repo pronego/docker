@@ -7,6 +7,9 @@ ARG TIMEZONE
 
 MAINTAINER Dr. Manuel Lamotte-Schubert <mls@pronego.com>
 
+# copy local files into image
+ADD my-config.ini /usr/local/etc/php/conf.d/
+
 RUN apt-get update && apt-get install -y \
 	less \
     openssl \
