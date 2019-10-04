@@ -14,7 +14,9 @@ Dockerfiles for various setups, such as
     - Choose the desired framework or system (*kohana*, *laravel*, *symfony*, *wordpress*),
     - Specify the PHP version
     - Specify the MySQL version and settings.
-3. Change into the .docker dir and run `docker-compose up -d`
+3. Change into the .docker dir and run `docker-compose up -d` to start, and 
+   `docker-compose down` to stop the containers.
+
 
 ## Useful `docker` commands
 
@@ -26,3 +28,16 @@ To rebuild a single container, run:
 
 > `-no-deps` - Don't start linked services.  
 > `--build` - Build images before starting containers.
+
+
+## Debug settings for PHPStorm
+Open `Settings > Language & Frameworks > PHP > Servers` and add a server configuration:\
+Usually we use `localhost`, but any name can be used as long as it matches the environment variable setting 
+in `docker-compose.yml` (variable in service `php`: `PHP_IDE_CONFIG: "serverName=localhost"`).
+
+- For HTTP debugging with a browser, adjust the path mapping:
+  In the same dialog, map project directory to `/var/www/app`.\
+  In the debug configuration window, select `Debug as PHP Web Page`.
+- For CLI debugging, activate `Listen to PHP Debug Connections` (toolbar, phone button), then open 
+  container bash and run app.
+  
