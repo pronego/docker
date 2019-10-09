@@ -24,7 +24,7 @@ To connect a terminal on windows (optionally prepend `winpty` if cmd results in 
 `docker exec -it <container name> bash`
 
 To rebuild a single container, run:  
-`docker-compose --no-deps --build <service_name>`
+`docker-compose up -d --no-deps --build <service_name>`
 
 > `--no-deps` - Don't build linked services from the depends_on section.  
 > `--build` - Build images before starting containers.
