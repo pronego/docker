@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     locales \
     libmcrypt-dev \
+    gnupg \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/* \
 	&& printf 'en_US.UTF-8 UTF-8\n' >> /etc/locale.gen \
@@ -35,6 +36,11 @@ RUN apt-get update && apt-get install -y \
 
 # Set alias for easier work on console
 RUN echo 'alias ll="ls -l --color=auto"' >> ~/.bashrc
+
+# Install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash - \
+&& apt-get -y install nodejs \
+&& npm install
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
