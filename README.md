@@ -2,7 +2,7 @@
 
 Dockerfiles for various setups, such as
 * nginx for Kohana, Laravel, Symfony, Wordpress
-* PHP 5.6, PHP 7.2
+* PHP versions: 5.6, 7.2, 7.3
 
 ## Usage
 
