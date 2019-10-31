@@ -4,7 +4,7 @@ MAINTAINER Dr. Manuel Lamotte-Schubert <mls@pronego.com>
 
 # copy local files into image
 ADD nginx.conf /etc/nginx/
-ADD symfony.conf /etc/nginx/sites-available/
+ADD contao.conf /etc/nginx/sites-available/
 
 RUN mkdir /etc/nginx/sites-enabled \
  && ln -s /etc/nginx/sites-available/contao.conf /etc/nginx/sites-enabled/contao \
