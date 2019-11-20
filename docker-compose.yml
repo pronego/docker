@@ -41,6 +41,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     networks:
       - web-network
+    working_dir: /var/lib/mysql
 
   nginx:
     # if 'image' defined together with 'build', it's used as the build tag
