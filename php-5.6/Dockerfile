@@ -8,6 +8,8 @@ ARG TIMEZONE
 MAINTAINER Dr. Manuel Lamotte-Schubert <mls@pronego.com>
 
 # copy local files into image
+ADD ioncube_loader_lin_5.6.so /usr/local/lib/php/
+ADD 00-ioncube.ini /usr/local/etc/php/conf.d/
 ADD my-config.ini /usr/local/etc/php/conf.d/
 
 RUN apt-get update && apt-get install -y \
