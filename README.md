@@ -1,7 +1,7 @@
 # Docker configurations
 
 Dockerfiles for various setups, such as
-* nginx for Kohana, Laravel, Symfony, Wordpress
+* nginx for Kohana, Laravel, Symfony, Wordpress, Contao, Others
 * PHP versions: 5.6, 7.2, 7.3
 
 ## Usage
@@ -11,9 +11,10 @@ Dockerfiles for various setups, such as
     or as a sub module (in your existing git project):  
     `git submodule add https://github.com/pronego/docker.git .docker`
 2. Adjust the *.env* file according to your requirements:
-    - Choose the desired framework or system (*kohana*, *laravel*, *symfony*, *wordpress*, *contao*),
+    - Choose the desired framework or system (*kohana*, *laravel*, *symfony*, *wordpress*, *contao*, *other*)  
+      Note: *other* is a simple Nginx configuration running php without any redirect rules.
     - Specify the PHP version
-    - Specify the MySQL version and settings.
+    - Specify the MySQL version and settings  
 3. Change into the .docker dir and run `docker-compose up -d` to start, and 
    `docker-compose down` to stop the containers.
 
@@ -41,3 +42,28 @@ in `docker-compose.yml` (variable in service `php`: `PHP_IDE_CONFIG: "serverName
 - For CLI debugging, activate `Listen to PHP Debug Connections` (toolbar, phone button), then open 
   container bash and run app.
   
+  
+## Notes on the PHP container
+Installed PHP extensions:
+- bcmath
+- ctype
+- curl
+- exif
+- gd
+- pdo
+- pdo_mysql
+- iconv
+- ioncube
+- intl
+- json
+- mbstring
+- mysqli
+- sodium
+- tokenizer
+- xdebug
+- xml
+- zip
+
+Further 3rd party software:
+- Composer
+- Node.js
