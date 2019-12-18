@@ -30,6 +30,13 @@ To rebuild a single container, run:
 > `--no-deps` - Don't build linked services from the depends_on section.  
 > `--build` - Build images before starting containers.
 
+## Networking features in Docker (for Windows)
+Connect from a Container to a service on the Host:
+Theres a special DNS name `host.docker.internal`, which resolves to the internal IP address used by the host.
+The gateway is also reachable as `gateway.docker.internal`.
+
+For more informations see the Official Documentation: https://docs.docker.com/docker-for-windows/networking
+
 
 ## Debug settings for PHPStorm
 Open `Settings > Language & Frameworks > PHP > Servers` and add a server configuration:\

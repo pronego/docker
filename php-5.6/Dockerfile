@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y \
     libssh2-1-dev libssh2-1 \
     locales \
     libmcrypt-dev \
+	iputils-ping \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/* \
 	&& printf 'en_US.UTF-8 UTF-8\n' >> /etc/locale.gen \

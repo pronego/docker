@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
     locales \
     libmcrypt-dev \
     gnupg \
+    iputils-ping \
 	--no-install-recommends \
 	&& rm -r /var/lib/apt/lists/* \
 	&& printf 'en_US.UTF-8 UTF-8\n' >> /etc/locale.gen \
