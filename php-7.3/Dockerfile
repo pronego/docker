@@ -63,11 +63,12 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer xml ctype jso
 	zip curl iconv gd intl exif sodium
 
 
-# Install xdebug + ssh2
-RUN pecl install xdebug ssh2-1.1.2 \
-&& docker-php-ext-enable xdebug ssh2 \
-&& pecl install mcrypt-1.0.2 \
-&& docker-php-ext-enable mcrypt \
+# Install xdebug
+RUN mkdir /src && cd /src && git clone https://github.com/xdebug/xdebug.git \
+&& cd xdebug \
+&& sh ./rebuild.sh \
+&& docker-php-source extract \
+&& docker-php-ext-enable xdebug \
 && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 && echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 && echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
