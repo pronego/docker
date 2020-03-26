@@ -10,7 +10,7 @@ Dockerfiles for various setups, such as
     `git clone https://github.com/pronego/docker.git .docker`  
     or as a sub module (in your existing git project):  
     `git submodule add https://github.com/pronego/docker.git .docker`
-2. Adjust the *.env* file according to your requirements:
+2. Copy *.env.example* to *.env* and adjust it according to your requirements:
     - Choose the desired framework or system (*kohana*, *laravel*, *symfony*, *wordpress*, *contao*, *other*)  
       Note: *other* is a simple Nginx configuration running php without any redirect rules.
     - Specify the PHP version
