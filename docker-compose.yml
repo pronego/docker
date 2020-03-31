@@ -97,3 +97,26 @@ services:
       - web-network
     depends_on:
       - db
+
+  # GitHub: https://github.com/fauria/docker-vsftpd
+  # Docker: https://hub.docker.com/r/fauria/vsftpd
+  ftp:
+    image: fauria/vsftpd
+    build:
+      context: ./ftp
+      args:
+        USER_ID: 1000
+        GROUP_ID: 1000
+    environment:
+      - FTP_USER=${FTP_USER}
+      - FTP_PASS=${FTP_PASS}
+    restart: always
+    ports:
+      - 0.0.0.0:20:20
+      - 0.0.0.0:21:21
+      - 21100-21110:21100-21110
+    volumes:
+      - ${APP_PATH}/${DOCKER_PATH}/ftp/home:/home/vsftpd
+      - ${APP_PATH}/${DOCKER_PATH}/logs/ftp:/var/log/vsftpd
+    networks:
+      - web-network
