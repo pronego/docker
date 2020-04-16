@@ -12,7 +12,8 @@ ADD ioncube_loader_lin_7.2.so /usr/local/lib/php/
 ADD 00-ioncube.ini /usr/local/etc/php/conf.d/
 ADD my-config.ini /usr/local/etc/php/conf.d/
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y libxml2-dev \
 	less \
     openssl \
     git \
@@ -35,7 +36,8 @@ RUN apt-get update && apt-get install -y \
 	&& rm -r /var/lib/apt/lists/* \
 	&& printf 'en_US.UTF-8 UTF-8\n' >> /etc/locale.gen \
 	&& printf 'de_DE.UTF-8 UTF-8\n' >> /etc/locale.gen \
-	&& locale-gen
+	&& locale-gen \
+    && docker-php-ext-install soap
 
 # Set alias for easier work on console
 RUN echo 'alias ll="ls -l --color=auto"' >> ~/.bashrc
