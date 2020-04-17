@@ -36,8 +36,7 @@ RUN apt-get update && \
 	&& rm -r /var/lib/apt/lists/* \
 	&& printf 'en_US.UTF-8 UTF-8\n' >> /etc/locale.gen \
 	&& printf 'de_DE.UTF-8 UTF-8\n' >> /etc/locale.gen \
-	&& locale-gen \
-    && docker-php-ext-install soap
+	&& locale-gen
 
 # Set alias for easier work on console
 RUN echo 'alias ll="ls -l --color=auto"' >> ~/.bashrc
@@ -62,7 +61,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 # requirements for laravel
 RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer xml ctype json bcmath  \
 # + some further
-	zip curl iconv gd intl exif sodium
+	zip curl iconv gd intl exif sodium soap
 
 
 # Install xdebug + ssh2
