@@ -82,7 +82,7 @@ services:
     networks:
       - web-network
 
-  # Call: http://[DOCKER-IP]:8081
+  # Call: http://[DOCKER-IP]:81
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin

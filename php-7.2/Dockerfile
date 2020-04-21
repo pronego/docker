@@ -61,25 +61,14 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 # requirements for laravel
 RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer xml ctype json bcmath  \
 # + some further
-	zip curl iconv gd intl exif sodium soap
+	zip curl iconv gd intl exif sodium soap calendar
 
 
 # Install xdebug + ssh2
 RUN pecl install xdebug ssh2-1.1.2 \
 && docker-php-ext-enable xdebug ssh2 \
 && pecl install mcrypt-1.0.2 \
-&& docker-php-ext-enable mcrypt \
-&& echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-&& echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-&& echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-&& echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#&& echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \ # not possible because talks to the containers internal ip
-&& echo "xdebug.remote_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-&& echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-&& echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-# use XDEBUG_PROFILE GET/POST parameter to activate
-&& echo "xdebug.profiler_enable_trigger=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-&& echo "xdebug.profiler_output_dir=/var/www/app" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+&& docker-php-ext-enable mcrypt
 
 # Cleanup
 RUN apt-get clean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/src
