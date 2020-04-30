@@ -91,6 +91,8 @@ services:
       # Alternatively, use arbitrary host, asked for it on the login page
       #- PMA_ARBITRARY=1
     restart: always
+    volumes:
+      - ${APP_PATH}/${DOCKER_PATH}/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
     ports:
       - 81:80
     networks:
