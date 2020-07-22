@@ -17,13 +17,6 @@ else
     export LOG_STDOUT='Yes.'
 fi
 
-## Set to YES if you want to disable the PASV security check that ensures the data connection originates
-## from the same IP address as the control connection. Only enable if you know what you are doing!
-## The only legitimate use for this is in some form of secure tunnelling scheme, or perhaps to facilitate FXP support.
-if [ "$PASV_PROMISCUOUS" = "YES" ]; then
-    export PASV_PROMISCUOUS='YES'
-fi
-
 # Create home dir and update vsftpd user db:
 mkdir -p "/home/vsftpd/${FTP_USER}"
 chown -R ftp:ftp /home/vsftpd/
@@ -41,6 +34,7 @@ echo "pasv_max_port=${PASV_MAX_PORT}" >> /etc/vsftpd/vsftpd.conf
 echo "pasv_min_port=${PASV_MIN_PORT}" >> /etc/vsftpd/vsftpd.conf
 echo "pasv_addr_resolve=${PASV_ADDR_RESOLVE}" >> /etc/vsftpd/vsftpd.conf
 echo "pasv_enable=${PASV_ENABLE}" >> /etc/vsftpd/vsftpd.conf
+echo "pasv_promiscuous=${PASV_PROMISCUOUS}" >> /etc/vsftpd/vsftpd.conf
 echo "file_open_mode=${FILE_OPEN_MODE}" >> /etc/vsftpd/vsftpd.conf
 echo "local_umask=${LOCAL_UMASK}" >> /etc/vsftpd/vsftpd.conf
 echo "xferlog_std_format=${XFERLOG_STD_FORMAT}" >> /etc/vsftpd/vsftpd.conf
