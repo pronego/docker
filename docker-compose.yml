@@ -112,6 +112,8 @@ services:
     environment:
       - FTP_USER=${FTP_USER}
       - FTP_PASS=${FTP_PASS}
+      - LOG_STDOUT=${LOG_STDOUT}
+      - PASV_PROMISCUOUS=${PASV_PROMISCUOUS}
     restart: always
     ports:
       - 0.0.0.0:20:20

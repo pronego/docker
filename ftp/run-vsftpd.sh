@@ -17,7 +17,9 @@ else
     export LOG_STDOUT='Yes.'
 fi
 
-# Do not log to STDOUT by default:
+## Set to YES if you want to disable the PASV security check that ensures the data connection originates
+## from the same IP address as the control connection. Only enable if you know what you are doing!
+## The only legitimate use for this is in some form of secure tunnelling scheme, or perhaps to facilitate FXP support.
 if [ "$PASV_PROMISCUOUS" = "YES" ]; then
     export PASV_PROMISCUOUS='YES'
 fi
