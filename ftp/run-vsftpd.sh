@@ -17,6 +17,11 @@ else
     export LOG_STDOUT='Yes.'
 fi
 
+# Do not log to STDOUT by default:
+if [ "$PASV_PROMISCUOUS" = "YES" ]; then
+    export PASV_PROMISCUOUS='YES'
+fi
+
 # Create home dir and update vsftpd user db:
 mkdir -p "/home/vsftpd/${FTP_USER}"
 chown -R ftp:ftp /home/vsftpd/
