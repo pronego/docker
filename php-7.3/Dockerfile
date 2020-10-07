@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y \
 	sendmail \
     libicu-dev \
     libssh2-1-dev \
+    libzip-dev \
     libxml2-dev \
     locales \
     libmcrypt-dev \
