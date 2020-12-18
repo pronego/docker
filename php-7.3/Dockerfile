@@ -64,8 +64,8 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer xml ctype jso
 	zip curl iconv gd intl exif sodium soap calendar
 
 
-# Install xdebug
-RUN mkdir /src && cd /src && git clone https://github.com/xdebug/xdebug.git \
+# Install xdebug 2.9
+RUN mkdir /src && cd /src && git clone -b xdebug_2_9 https://github.com/xdebug/xdebug.git \
 && cd xdebug \
 && sh ./rebuild.sh \
 && docker-php-source extract \

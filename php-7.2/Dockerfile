@@ -64,8 +64,8 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer xml ctype jso
 	zip curl iconv gd intl exif sodium soap calendar
 
 
-# Install xdebug + ssh2
-RUN pecl install xdebug ssh2-1.1.2 \
+# Install xdebug 2 + ssh2
+RUN pecl install xdebug-2.9.8 ssh2-1.1.2 \
 && docker-php-ext-enable xdebug ssh2 \
 && pecl install mcrypt-1.0.2 \
 && docker-php-ext-enable mcrypt
