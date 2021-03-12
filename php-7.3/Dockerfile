@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y \
 RUN echo 'alias ll="ls -l --color=auto"' >> ~/.bashrc
 
 # Install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
 && apt-get -y install nodejs \
 && npm install
 
