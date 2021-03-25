@@ -30,12 +30,21 @@ To rebuild a single container, run:
 > `--no-deps` - Don't build linked services from the depends_on section.  
 > `--build` - Build images before starting containers.
 
-## Networking features in Docker (for Windows)
+## Networking features in Docker
+
+### Windows
 Connect from a Container to a service on the Host:
-Theres a special DNS name `host.docker.internal`, which resolves to the internal IP address used by the host.
+There is a special DNS name `host.docker.internal`, which resolves to the internal IP address used by the host.
 The gateway is also reachable as `gateway.docker.internal`.
 
 For more informations see the Official Documentation: https://docs.docker.com/docker-for-windows/networking
+
+### Linux
+Uncomment the following block in `docker-compose.yml` for the `php` container to establish a connection between XDebug and PHPStorm.
+```
+extra_hosts:
+    - "host.docker.internal:host-gateway"
+```
 
 
 ## Debug settings for PHPStorm
@@ -48,6 +57,7 @@ in `docker-compose.yml` (variable in service `php`: `PHP_IDE_CONFIG: "serverName
   In the debug configuration window, select `Debug as PHP Web Page`.
 - For CLI debugging, activate `Listen to PHP Debug Connections` (toolbar, phone button), then open 
   container bash and run app.
+- For Debugging under Linux, see section Networking features in Docker  
   
   
 ## Notes on the PHP container

@@ -81,8 +81,9 @@ services:
       - db
     networks:
       - web-network
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    # Only required under Linux
+    #extra_hosts:
+    #  - "host.docker.internal:host-gateway"
 
   # Call: http://[DOCKER-IP]:81
   phpmyadmin:
